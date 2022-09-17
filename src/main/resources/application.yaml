@@ -1,0 +1,50 @@
+spring:
+  jpa:
+    hibernate.ddl-auto: "update"
+    hibernate.dialect: "PostgreSQLDialect"
+    hibernate.default_schema: "internet_store"
+    show-sql: true
+  datasource:
+    initialization-mode: always
+    url: "jdbc:postgresql://localhost:5432/internet_store"
+    username: "admin"
+    password: "admin"
+
+  flyway:
+    url: "jdbc:postgresql://localhost:5432/internet_store?ssl=false"
+    user: "admin"
+    password: "admin"
+    locations: "classpath:/db/migration"
+  main:
+    allow-bean-definition-overriding: true
+    allow-circular-references: true
+  freemarker:
+    templateLoaderPath:
+      - "classpath:/template/ftl/"
+
+server:
+  port: 8090
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+name: dev-spring
+environment: develop
+enabled: true
+server:
+  port: 8090
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+name: prod-spring
+environment: develop
+enabled: false
+server:
+  port: 8090
