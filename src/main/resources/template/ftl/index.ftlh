@@ -25,11 +25,11 @@
           <br/>
           <table class="datatable">
             <tr>
-                <th>name</th>  <th>email</th> <th>phone</th>
+                <th>first_name</th> <th>last_name</th>  <th>email</th> <th>phone</th>
             </tr>
-            <#list model["personList"] as person>
+            <#list model["customerList"] as customer>
                 <tr>
-                    <td>${person.name}</td> <td>${person.email}</td> <td>${person.phoneNumber}</td>
+                    <td>${customer.firstName}</td> <td>${customer.lastName}</td> <td>${customer.email}</td> <td>${customer.phoneNumber}</td>
                 </tr>
             </#list>
           </table>

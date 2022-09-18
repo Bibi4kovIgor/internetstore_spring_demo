@@ -1,9 +1,12 @@
 spring:
+  profiles.active: dev
   jpa:
-    hibernate.ddl-auto: "update"
-    hibernate.dialect: "PostgreSQLDialect"
-    hibernate.default_schema: "internet_store"
+    hibernate:
+      ddl-auto: "validate"
+      dialect: "PostgreSQLDialect"
+      default_schema: "internet_store"
     show-sql: true
+
   datasource:
     initialization-mode: always
     url: "jdbc:postgresql://localhost:5432/internet_store"
@@ -15,15 +18,13 @@ spring:
     user: "admin"
     password: "admin"
     locations: "classpath:/db/migration"
+
   main:
     allow-bean-definition-overriding: true
     allow-circular-references: true
   freemarker:
     templateLoaderPath:
       - "classpath:/template/ftl/"
-
-server:
-  port: 8090
 
 ---
 
@@ -34,6 +35,7 @@ spring:
 name: dev-spring
 environment: develop
 enabled: true
+
 server:
   port: 8090
 
@@ -46,5 +48,6 @@ spring:
 name: prod-spring
 environment: develop
 enabled: false
+
 server:
-  port: 8090
+  port: 8095

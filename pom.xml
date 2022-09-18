@@ -18,6 +18,7 @@
 		<java.version>17</java.version>
 		<encoding>UTF-8</encoding>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
