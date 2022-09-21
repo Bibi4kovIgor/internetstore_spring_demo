@@ -1,10 +1,10 @@
 package edu.lemon_school.internetstore.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 

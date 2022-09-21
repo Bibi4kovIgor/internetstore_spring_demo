@@ -40,6 +40,16 @@ public class InternetStoreServiceImplementation implements InternetStoreService 
     }
 
     @Override
+    public void addNewCustomer(Customer customer) {
+        customerRepository.save(customer);
+    }
+
+    @Override
+    public List<Customer> getCustomersByName(String name) {
+        return customerRepository.getCustomersByNane(name);
+    }
+
+    @Override
     public List<Payment> paymentList() {
         return paymentRepository.findAll();
     }

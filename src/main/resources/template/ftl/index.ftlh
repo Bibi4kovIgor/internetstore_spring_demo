@@ -1,43 +1,22 @@
-<html>
-    <head>
-        <title>Freemarker simple</title>
-        <link rel="stylesheet" href="../css/style.css">
-    </head>
-    <body>
-        <div id = "header">
-            <h2>
-                Internet-store demo
-            </h2>
-        </div>
+<#import "layouts/main.ftl" as layout>
+<@layout.page>
+    <#assign all_customers = "all_customers">
+    <#assign all_products = "all_products">
+    <#assign add_payment = "add_payment">
+    <#assign add_customer = "add_customer">
 
-        <div id="content">
+    <p>
+        <a href="${all_customers}">All Customers</a>
+    </p>
+    <p>
+        <a href="${all_products}">All Products</a>
+    </p>
+    <p>
+        <a href="${add_payment}">Add Payment</a>
+    </p>
+    <p>
+        <a href="${add_customer}">Add Customer</a>
+    </p>
 
-          <fieldset>
-            <legend>Add Person</legend>
-          <form name="LogIn" action="add" method="post">
-            Name : <input type="text" name="name" />	<br/>
-            Email: <input type="text" name="email" />	<br/>
-            Phone: <input type="text" name="phone" />	<br/>
-            <input type="submit" value="   Save   " />
-          </form>
-          </fieldset>
+</@layout.page>
 
-          <br/>
-          <table class="datatable">
-            <tr>
-                <th>first_name</th> <th>last_name</th>  <th>email</th> <th>phone</th>
-            </tr>
-            <#list model["customerList"] as customer>
-                <tr>
-                    <td>${customer.firstName}</td> <td>${customer.lastName}</td> <td>${customer.email}</td> <td>${customer.phoneNumber}</td>
-                </tr>
-            </#list>
-          </table>
-
-        </div>
-
-        <div id="footer">
-
-        </div>
-    </body>
-</html>
