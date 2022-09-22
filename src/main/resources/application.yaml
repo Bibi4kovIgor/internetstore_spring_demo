@@ -22,6 +22,7 @@ spring:
   main:
     allow-bean-definition-overriding: true
     allow-circular-references: true
+
   freemarker:
     templateLoaderPath:
       - "classpath:/template/ftl/"

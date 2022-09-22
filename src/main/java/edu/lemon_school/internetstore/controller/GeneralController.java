@@ -40,7 +40,7 @@ public class GeneralController {
             @ModelAttribute("model") ModelMap model) {
         List<Customer> customers = internetStoreService.getCustomersByName(firstName);
         model.addAttribute("customersList", customers);
-        return "customers";
+        return "/pages/all_customers";
     }
 
 
@@ -75,7 +75,7 @@ public class GeneralController {
 
     private void enrichModelAttribute(@ModelAttribute("model") ModelMap model) {
         List<Customer> customers = internetStoreService.customerList();
-        model.addAttribute("customerList", customers);
+        model.addAttribute("customersList", customers);
     }
 
 

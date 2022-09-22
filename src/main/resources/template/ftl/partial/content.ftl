@@ -8,4 +8,4 @@
         <#import "/partial/${url}" as c>
         <@c.content />
     </div>
-</#content>
+</#macro>

@@ -43,7 +43,7 @@ public class Customer {
     private Set<Address> addresses;
 
     @ManyToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    @JoinTable(name = "OrderBy",
+    @JoinTable(name = "OrderBy", 
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "customer_id"))
     private Set<Product> products;
