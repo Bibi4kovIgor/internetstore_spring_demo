@@ -34,6 +34,11 @@ spring:
     activate:
       on-profile: dev
 #  security:
+#    oauth2:
+#      client:
+#        registration:
+#          github:
+#            clientId:
 #    user:
 #      name: "user"
 #      password: "user"

@@ -3,12 +3,10 @@ package edu.lemon_school.internetstore.controller;
 import edu.lemon_school.internetstore.dto.CustomerDto;
 import edu.lemon_school.internetstore.dto.PaymentDto;
 import edu.lemon_school.internetstore.dto.ProductDto;
-import edu.lemon_school.internetstore.entity.Customer;
-import edu.lemon_school.internetstore.entity.User;
+import edu.lemon_school.internetstore.dto.UserDto;
 import edu.lemon_school.internetstore.rolesenum.Role;
 import edu.lemon_school.internetstore.service.CustomUserDetailsService;
-import edu.lemon_school.internetstore.service.InternetStoreService;
-import org.springframework.security.access.prepost.PreAuthorize;
+import edu.lemon_school.internetstore.service.GeneralService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,15 +15,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
+import static edu.lemon_school.internetstore.utils.EnrichControllerMethods.enrichCustomerModelAttribute;
+
+
 @Controller
 public class GeneralController {
 
-    private final InternetStoreService internetStoreService;
+    private final GeneralService generalService;
     private final CustomUserDetailsService userService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public GeneralController(InternetStoreService internetStoreService, CustomUserDetailsService userService, BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.internetStoreService = internetStoreService;
+    public GeneralController(GeneralService generalService, CustomUserDetailsService userService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.generalService = generalService;
         this.userService = userService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
@@ -40,20 +41,20 @@ public class GeneralController {
                         @RequestParam("userName") String userName,
                         @RequestParam("password") String password) {
 
-        User user = User.builder()
+        UserDto userDto = UserDto.builder()
                 .userName(userName)
                 .userPass(bCryptPasswordEncoder.encode(password))
                 .userRole(Role.USER.getRoleName())
                 .build();
-        userService.addNewUser(user);
-        return "/";
+        userService.addNewUser(userDto);
+        return "index";
     }
 
     @GetMapping(value = "/get_customer_by_name")
     public ModelAndView getCustomerByName(
             @RequestParam("firstName") String firstName,
             @ModelAttribute("model") ModelMap model) {
-        List<CustomerDto> customers = internetStoreService.getCustomersByName(firstName);
+        List<CustomerDto> customers = generalService.getCustomersByName(firstName);
         model.addAttribute("customersList", customers);
         return new ModelAndView("/pages/all_customers", model);
     }
@@ -64,49 +65,17 @@ public class GeneralController {
         return "index";
     }
 
-    @GetMapping(value = "/add_payment")
-    public String addPayment(@ModelAttribute("model") ModelMap model) {
-        List<PaymentDto> paymentList = internetStoreService.paymentList();
-        model.addAttribute("paymentList", paymentList);
-        return "/pages/add_payment";
-    }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping(value = "/add_customer")
-    public String addCustomer(@ModelAttribute("model") ModelMap model) {
-        enrichModelAttribute(model);
-        return "/pages/add_customer";
-    }
-
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PostMapping(value = "/add-new-customer")
-    public ModelAndView addNewCustomer(
-            @ModelAttribute("model") ModelMap model,
-            @RequestParam(name = "firstName") String firstName,
-            @RequestParam(name = "lastName") String lastName,
-            @RequestParam(name = "email") String email,
-            @RequestParam(name = "phoneNumber") String phoneNumber
-    ) {
-         Customer customer = Customer.builder()
-                .firstName(firstName)
-                .lastName(lastName)
-                .email(email)
-                .phoneNumber(phoneNumber)
-                .build();
-        internetStoreService.addNewCustomer(customer);
-        enrichModelAttribute(model);
-        return new ModelAndView("/pages/add_customer", model);
-    }
 
     @GetMapping(value = "/all_customers")
     public String allCustomers(@ModelAttribute("model") ModelMap model) {
-        enrichModelAttribute(model);
+        enrichCustomerModelAttribute(model);
         return "/pages/all_customers";
     }
 
     @GetMapping(value = "/all_products")
     public String getAllProducts(@ModelAttribute("model") ModelMap model) {
-        List<ProductDto> products = internetStoreService.productsList();
+        List<ProductDto> products = generalService.productsList();
         model.addAttribute("productList", products);
         return "/pages/all_products";
     }
@@ -153,10 +122,8 @@ public class GeneralController {
         return new ModelAndView("/pages/greet", model);
     }
 
-    private void enrichModelAttribute(@ModelAttribute("model") ModelMap model) {
-        List<CustomerDto> customers = internetStoreService.customerList();
-        model.addAttribute("customersList", customers);
-    }
+
+
 
 
 

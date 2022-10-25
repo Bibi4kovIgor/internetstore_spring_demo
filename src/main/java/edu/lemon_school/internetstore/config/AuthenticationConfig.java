@@ -16,12 +16,13 @@ public class AuthenticationConfig {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer(){
         return (web -> web.ignoring()
-                .antMatchers("/", "/all_products", "/registration"));
+                .antMatchers("/", "/registration"));
     }
 
     @Bean
     public SecurityFilterChain configure (HttpSecurity httpSecurity) throws Exception {
         httpSecurity
+                .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
                 .formLogin().and()
                 .csrf().disable();
         return httpSecurity.build();

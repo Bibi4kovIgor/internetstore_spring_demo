@@ -1,7 +1,9 @@
 package edu.lemon_school.internetstore.service;
 
+import edu.lemon_school.internetstore.dto.UserDto;
 import edu.lemon_school.internetstore.entity.User;
 import edu.lemon_school.internetstore.repository.UserRepository;
+import edu.lemon_school.internetstore.utils.DtoToEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -18,12 +20,13 @@ public class CustomUserDetailsServiceImplementation implements CustomUserDetails
 
     @Override
     public UserDetails loadUserByUsername(String username) {
-        return Optional.ofNullable(userRepository.findUserByName(username))
+        return Optional.ofNullable(userRepository.findByUserName(username))
                 .orElseThrow(() -> new UsernameNotFoundException("Username was not found!"));
     }
 
     @Override
-    public void addNewUser(User user) {
+    public void addNewUser(UserDto userDto) {
+        User user = DtoToEntity.userDtoToEntity(userDto);
         userRepository.save(user);
     }
 }
