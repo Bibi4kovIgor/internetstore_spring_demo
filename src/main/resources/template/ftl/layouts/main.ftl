@@ -4,9 +4,11 @@
         <#import "/partial/header.ftl" as h>
         <@h.header />
         <body>
-            <div id="container">
-                <#nested>
-            </div>
+            <main>
+                <div id="container">
+                    <#nested>
+                </div>
+            </main>
             <#import "/partial/footer.ftl" as f>
             <@f.footer />
         </body>

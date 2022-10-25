@@ -1,14 +1,17 @@
 package edu.lemon_school.internetstore.service;
 
+import edu.lemon_school.internetstore.dto.CustomerDto;
+import edu.lemon_school.internetstore.dto.PaymentDto;
+import edu.lemon_school.internetstore.dto.ProductDto;
 import edu.lemon_school.internetstore.entity.Address;
 import edu.lemon_school.internetstore.entity.Customer;
-import edu.lemon_school.internetstore.entity.Payment;
-import edu.lemon_school.internetstore.entity.Product;
 import edu.lemon_school.internetstore.repository.AddressRepository;
 import edu.lemon_school.internetstore.repository.CustomerRepository;
 import edu.lemon_school.internetstore.repository.PaymentRepository;
 import edu.lemon_school.internetstore.repository.ProductRepository;
+import edu.lemon_school.internetstore.utils.EntityToDto;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -35,8 +38,10 @@ public class InternetStoreServiceImplementation implements InternetStoreService 
     }
 
     @Override
-    public List<Customer> customerList() {
-        return customerRepository.findAll();
+    public List<CustomerDto> customerList() {
+        return customerRepository.findAll().stream()
+                .map(EntityToDto::customerEntityToDto)
+                .toList();
     }
 
     @Override
@@ -45,17 +50,24 @@ public class InternetStoreServiceImplementation implements InternetStoreService 
     }
 
     @Override
-    public List<Customer> getCustomersByName(String name) {
-        return customerRepository.getCustomersByNane(name);
+    public List<CustomerDto> getCustomersByName(String name) {
+        return customerRepository.getCustomersByNane(name).stream()
+                .map(EntityToDto::customerEntityToDto)
+                .toList();
     }
 
     @Override
-    public List<Payment> paymentList() {
-        return paymentRepository.findAll();
+    public List<PaymentDto> paymentList() {
+        return paymentRepository.findAll().stream()
+                .map(EntityToDto::paymentEntityToDto)
+                .toList();
     }
 
     @Override
-    public List<Product> productsList() {
-        return productRepository.findAll();
+    public List<ProductDto> productsList() {
+
+        return productRepository.findAll().stream()
+                .map(EntityToDto::productEntityToDto)
+                .toList();
     }
 }

@@ -1,6 +1,6 @@
 package edu.lemon_school.internetstore.entity;
 
-import lombok.Data;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,10 +10,11 @@ import java.util.UUID;
 
 @Getter
 @Setter
+@Builder
 @ToString
 @Entity
 @Table(name = "Payment")
-public class Payment implements EntityModel {
+public class Payment {
     @Id
     @GeneratedValue
     @Column(name = "id")

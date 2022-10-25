@@ -33,9 +33,17 @@ spring:
   config:
     activate:
       on-profile: dev
+#  security:
+#    user:
+#      name: "user"
+#      password: "user"
+#      role: "user"
+
 name: dev-spring
 environment: develop
 enabled: true
+
+
 
 server:
   port: 8090

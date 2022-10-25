@@ -1,21 +1,21 @@
 package edu.lemon_school.internetstore.entity;
 
-import lombok.Data;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
 @Getter
 @Setter
+@Builder
 @ToString
 @Entity
 @Table(name = "Product")
-public class Product implements EntityModel {
+public class Product {
     @Id
     @GeneratedValue
     @Column(name = "id")

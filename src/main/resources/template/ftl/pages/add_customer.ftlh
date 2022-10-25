@@ -2,7 +2,7 @@
 <@layout.page>
     <fieldset>
         <legend>Add Customer</legend>
-        <form name="LogIn" action="/login" method="post">
+        <form name="LogIn" action="/add-new-customer" method="post">
             First Name : <input type="text" name="firstName" />	<br/>
             Last Name : <input type="text" name="lastName" />	<br/>
             Email: <input type="text" name="email" />	<br/>
