@@ -11,7 +11,7 @@
 	<groupId>edu.lemon_school.internetstore</groupId>
 	<artifactId>internetstore</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>internet-store</name>
 	<description>Demo internet store</description>
 	<properties>
@@ -82,7 +82,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>${parent.version}</version>
+				<version>${project.parent.version}</version>
 				<configuration>
 					<excludes>
 						<exclude>

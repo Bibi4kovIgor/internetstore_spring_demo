@@ -20,4 +20,4 @@ services:
       - "5433:80"
 networks:
   default:
-    name: custom
+    name: internal
