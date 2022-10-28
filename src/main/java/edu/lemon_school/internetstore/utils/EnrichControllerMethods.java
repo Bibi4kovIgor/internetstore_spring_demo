@@ -3,8 +3,6 @@ package edu.lemon_school.internetstore.utils;
 import edu.lemon_school.internetstore.dto.CustomerDto;
 import edu.lemon_school.internetstore.dto.PaymentDto;
 import edu.lemon_school.internetstore.service.GeneralService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,9 +14,6 @@ public class EnrichControllerMethods {
 
     public static GeneralService GENERAL_SERVICE;
 
-    private void setGeneralServiceStatic(GeneralService generalService) {
-        GENERAL_SERVICE = generalService;
-    }
 
     public EnrichControllerMethods(GeneralService generalService) {
         GENERAL_SERVICE = generalService;

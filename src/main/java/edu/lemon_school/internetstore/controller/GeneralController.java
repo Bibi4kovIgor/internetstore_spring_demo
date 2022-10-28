@@ -1,12 +1,13 @@
 package edu.lemon_school.internetstore.controller;
 
+import edu.lemon_school.internetstore.config.YamlConfig;
 import edu.lemon_school.internetstore.dto.CustomerDto;
-import edu.lemon_school.internetstore.dto.PaymentDto;
 import edu.lemon_school.internetstore.dto.ProductDto;
 import edu.lemon_school.internetstore.dto.UserDto;
 import edu.lemon_school.internetstore.rolesenum.Role;
 import edu.lemon_school.internetstore.service.CustomUserDetailsService;
 import edu.lemon_school.internetstore.service.GeneralService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,6 +25,7 @@ public class GeneralController {
     private final GeneralService generalService;
     private final CustomUserDetailsService userService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     public GeneralController(GeneralService generalService, CustomUserDetailsService userService, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.generalService = generalService;
@@ -120,6 +122,12 @@ public class GeneralController {
         model.addAttribute("first_name", firstName);
         model.addAttribute("last_name", lastName);
         return new ModelAndView("/pages/greet", model);
+    }
+
+    @GetMapping(value = "/get-config-key")
+    @ResponseBody
+    public String getConfigKey(){
+        return YamlConfig.Config.getKey();
     }
 
 

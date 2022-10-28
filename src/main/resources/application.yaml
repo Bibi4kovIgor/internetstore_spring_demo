@@ -25,7 +25,7 @@ spring:
 
   freemarker:
     templateLoaderPath:
-      - "classpath:/template/ftl/"
+      - "classpath:/static/template/ftl/"
 
 ---
 
@@ -47,6 +47,7 @@ spring:
 name: dev-spring
 environment: develop
 enabled: true
+key: "Secret_Key"
 
 
 

@@ -1,9 +1,7 @@
-FROM amazoncorretto:17.0.4
+FROM amazoncorretto:17.0.5-alpine
+EXPOSE 8090
 RUN addgroup -S spring-group && adduser -S spring -G spring-group
-WORKDIR target/dependency
 USER spring:spring-group
-ARG DEPENDENCY=target/dependency
-COPY ${DEPENDENCY}/BOOT-INF/lib /app/lib
-COPY ${DEPENDENCY}/META-INF /app/META-INF
-COPY ${DEPENDENCY}/BOOT-INF/classes /app
-ENTRYPOINT ["java","-cp","app:app/lib/*","internetstore.Application"]
+ARG JAR_FILE=app.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","app.jar"]
