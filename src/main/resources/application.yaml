@@ -9,12 +9,12 @@ spring:
 
   datasource:
     initialization-mode: always
-    url: "jdbc:postgresql://localhost:5432/internet_store"
+    url: "jdbc:postgresql://internet-store-db:5432/internet_store"
     username: "admin"
     password: "admin"
 
   flyway:
-    url: "jdbc:postgresql://localhost:5432/internet_store?ssl=false"
+    url: "jdbc:postgresql://internet-store-db:5432/internet_store?ssl=false"
     user: "admin"
     password: "admin"
     locations: "classpath:/db/migration"

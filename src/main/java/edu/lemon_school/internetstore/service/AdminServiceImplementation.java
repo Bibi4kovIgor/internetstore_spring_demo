@@ -24,7 +24,6 @@ public class AdminServiceImplementation implements AdminService {
     @Override
     public void addNewCustomer(CustomerDto customerDto) {
         Customer customer = Customer.builder()
-                .id(UUID.fromString(customerDto.getId()))
                 .firstName(customerDto.getFirstName())
                 .lastName(customerDto.getLastName())
                 .phoneNumber(customerDto.getPhoneNumber())
